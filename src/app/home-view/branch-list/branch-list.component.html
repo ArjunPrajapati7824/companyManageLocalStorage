@@ -1,0 +1,27 @@
+<div class="container col-sm-8 mt-3">
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">Branch Id</th>
+            <th scope="col">Company Id</th>
+            <th scope="col">branch Name</th>
+            <th scope="col">Total Branch</th>
+            <th scope="col" *ngIf="editPermission || deletePermission">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr *ngFor="let branch of branchDetails">
+            <td scope="row">{{branch.branchId}}</td>
+            <td >{{branch.companyId}}</td>
+            <td>{{branch.branchName}}</td>
+            <td>{{branch.branchCount}}</td>
+            <td *ngIf="editPermission" ><button class="btn btn-primary">Edit</button></td>
+            <td *ngIf="deletePermission" ><button class="btn btn-danger">Delete</button></td>
+        </tr>
+    </tbody>
+    
+    </table>
+    </div>
+    

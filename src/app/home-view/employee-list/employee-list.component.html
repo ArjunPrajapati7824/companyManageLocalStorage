@@ -1,0 +1,42 @@
+<div class="container col-sm-6 mt-3">
+<table class="table" >
+    <thead>
+    <tr>
+        <th scope="col">UserId</th>
+        <th scope="col">UserName</th>
+        <th scope="col">UserRole</th>
+        <th scope="col" *ngIf="editPermission || deletePermission">Action</th>
+    </tr>
+</thead>
+<tbody>
+
+    <tr *ngFor="let user of TempData">
+        <td cope="row">{{user.userid}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.userrole}}</td>
+        <td *ngIf="editPermission" ><button class="btn btn-primary" (click)="formOpen(user)">Edit</button></td>
+        <td *ngIf="deletePermission" ><button class="btn btn-danger" (click)="deleteData(user)">Delete</button></td>
+    </tr>
+</tbody>
+
+</table>
+</div>
+
+<div class="container col-sm-3" *ngIf="isFormOpen">
+    <div class="row">
+        <div class="col-xs-6">
+            <label>Enter New Id</label>    
+            <input type="text" class="form-control" [(ngModel)]="getid" #updateId >
+            
+            <label>Enter New Name</label>    
+            <input type="text" class="form-control" [(ngModel)]="getname" #updateName >
+            
+            <label>Enter New User Role</label>    
+            <input type="text" class="form-control" [(ngModel)]="getrole" #updateRole ><br>
+
+            <button class="btn btn-success" (click)="updateData(updateId.value,updateName.value,updateRole.value)" >Update Data</button>
+        </div>
+    </div>
+</div>
+
+

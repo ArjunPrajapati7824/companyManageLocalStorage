@@ -1,0 +1,48 @@
+<div class="container col-sm-8 mt-3">
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">Company Id</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">company Location</th>
+            <th scope="col">company GstNumber</th>
+            <th scope="col" *ngIf="editPermission || deletePermission">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr *ngFor="let company of companyDetails">
+            <td cope="row">{{company.companyId}}</td>
+            <td>{{company.companyName}}</td>
+            <td>{{company.companyLocation}}</td>
+            <td>{{company.companyGstNumber}}</td>
+            <td *ngIf="editPermission" ><button class="btn btn-primary" (click)="formOpen(company)">Edit</button></td>
+            <td *ngIf="deletePermission" ><button class="btn btn-danger" (click)="deleteData(company)">Delete</button></td>
+        </tr>
+    </tbody>
+    
+    </table>
+    </div>
+
+
+    <div class="container col-sm-3" *ngIf="isFormOpen">
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Enter New Id</label>    
+                <input type="text" class="form-control" [(ngModel)]="getid" #updateId >
+                
+                <label>Enter New Name</label>    
+                <input type="text" class="form-control" [(ngModel)]="getname" #updateName >
+                
+                <label>Enter New Location</label>    
+                <input type="text" class="form-control" [(ngModel)]="getlocation" #updateLocation ><br>
+    
+                <label>Enter New Gst number</label>    
+                <input type="text" class="form-control" [(ngModel)]="getGst" #updateGst ><br>
+
+                <button class="btn btn-success" (click)="updateData(updateId.value,updateName.value,updateLocation.value,updateGst.value)" >Update Data</button>
+            </div>
+        </div>
+    </div>
+    
