@@ -8,10 +8,9 @@ import { CompanyListComponent } from './home-view/company-list/company-list.comp
 import { BranchListComponent } from './home-view/branch-list/branch-list.component';
 import { AuthGuard } from './Auth-Guard/auth.guard';
 import { LoginAuthGuard } from './Auth-Guard/login-auth.guard';
-import { RegisterAuthGuard } from './Auth-Guard/register-auth.guard';
 
 const routes: Routes = [
-  {path:'',canActivate:[RegisterAuthGuard],component:RegisterComponent},
+  {path:'',canActivate:[LoginAuthGuard],component:RegisterComponent},
   {path:'login', canActivate:[LoginAuthGuard],component:LoginComponent},
   {path:'home', canActivate:[AuthGuard],component:HomeViewComponent,children:[
     {path:'employee',component:EmployeeListComponent},

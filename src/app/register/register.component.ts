@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  @ViewChild('username') username!:ElementRef
-  @ViewChild('password') password!:ElementRef
+  // @ViewChild('username') username!:ElementRef
+  // @ViewChild('password') password!:ElementRef
   constructor(private route:Router) { }
 
   id=0
@@ -25,15 +25,15 @@ export class RegisterComponent implements OnInit {
     ]
   }
 
-  RegisterUSer(){
+  RegisterUSer(username:string,password:string){
     let id=++this.id
-    let name=this.username.nativeElement.value
-    let pass=this.password.nativeElement.value
+    let userrole="user"
     // this.UserData.push({userid:id,username:name,password:pass,userrole:"user"})
     
     
     this.UserData[this.UserData.length]=({userid:id,username:name,password:pass,userrole:"user"})
     localStorage.setItem("UserData",JSON.stringify(this.UserData))
+    
 
     console.log("new",this.UserData);
     

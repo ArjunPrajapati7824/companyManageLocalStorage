@@ -3,7 +3,7 @@ import { UserData } from "../Models/UserData";
 export class userDataService{
 
     TempData:UserData[]=[
-        {userid:1,username:'Arjun',userrole:'user',password:''},
+      {userid:1,username:'Arjun',userrole:'user',password:''},
       {userid:2,username:'Manthan',userrole:'user',password:''},
       {userid:3,username:'Jeel',userrole:'user',password:''},
       {userid:4,username:'Mayur',userrole:'user',password:''},
@@ -13,6 +13,12 @@ export class userDataService{
       {userid:8,username:'Meet',userrole:'user',password:''},
     ]
 
+
+    addData(){
+
+    }
+
+    
     getData(){
         return this.TempData
     }
