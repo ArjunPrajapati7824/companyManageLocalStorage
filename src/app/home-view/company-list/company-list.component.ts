@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Companydetails } from 'src/app/Models/Companydetails';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyDataService } from 'src/app/Services/companyDataService';
+import { authService } from 'src/app/Services/authService';
 
 
 @Component({
@@ -11,12 +12,12 @@ import { CompanyDataService } from 'src/app/Services/companyDataService';
 })
 export class CompanyListComponent implements OnInit {
 
-  constructor(private service : CompanyDataService,private currentRoute :ActivatedRoute) { }
+  constructor(private service : CompanyDataService,private currentRoute :ActivatedRoute,
+              private authService:authService) { }
 
 
   editPermission:boolean=false
   deletePermission:boolean=false
-  userrole:string|null=null
 
 
   companyDetails:Companydetails[]=[]
@@ -30,22 +31,22 @@ export class CompanyListComponent implements OnInit {
     getGst:number|null=null
 
   ngOnInit(): void {
-    localStorage.setItem('companyDetails',JSON.stringify(this.companyDetails))
     
-    this.userrole=this.currentRoute.snapshot.queryParamMap.get('userrole')
 
     this.companyDetails=this.service.getData()
+    this.authService.getLoggedUser()
+    
 
-    if(this.userrole==='user'){
+    if(this.authService.userRole==='user'){
       this.editPermission=false
       this.deletePermission=false
     }
   
-    if(this.userrole==='Admin'){
+    if(this.authService.userRole==='Admin'){
       this.editPermission=true
       this.deletePermission=false
     }
-    if(this.userrole==='superAdmin'){
+    if(this.authService.userRole==='SuperAdmin'){
       this.editPermission=true
       this.deletePermission=true
     }

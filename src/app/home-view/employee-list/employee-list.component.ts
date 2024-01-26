@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/Models/UserData';
 import { userDataService } from './../../Services/userDataService.service';
+import { authService } from 'src/app/Services/authService';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,7 +12,8 @@ import { userDataService } from './../../Services/userDataService.service';
 export class EmployeeListComponent implements OnInit {
 
 
-  constructor(private service : userDataService,private Route : Router,private currentRoute :ActivatedRoute) { 
+  constructor(private service : userDataService,private Route : Router,private currentRoute :ActivatedRoute,
+              private authService:authService) { 
    console.log("i am cmoning");
    
     
@@ -34,32 +36,21 @@ export class EmployeeListComponent implements OnInit {
   
 
   ngOnInit(): void {
-  //   localStorage.setItem('TempData',JSON.stringify(this.TempData))
-  // let pasrseData=localStorage.getItem('TempData')
-  //  if(pasrseData){
-  //   this.TempData=JSON.parse(pasrseData)
-  //  }
 
   this.TempData=this.service.getData()
 
-   const checkUser=localStorage.getItem('loggedUser')
-   if(checkUser){
-      this.loggedUser=JSON.parse(checkUser)  
+   this.authService.getLoggedUser()
 
-    }
-
-    this.userrole=this.currentRoute.snapshot.queryParamMap.get('userrole')
-
-    if(this.userrole==='user'){
+    if(this.authService.userRole==='user'){
       this.editPermission=false
       this.deletePermission=false
     }
   
-    if(this.userrole==='Admin'){
+    if(this.authService.userRole==='Admin'){
       this.editPermission=true
       this.deletePermission=false
     }
-    if(this.userrole==='superAdmin'){
+    if(this.authService.userRole==='SuperAdmin'){
       this.editPermission=true
       this.deletePermission=true
     }
@@ -88,6 +79,8 @@ export class EmployeeListComponent implements OnInit {
 
   updateData(id:string,name:string,role:string){
     this.service.updateData(this.getId,id,name,role)
+    this.isFormOpen=false//update value for show or not form
+
   }
 
   deleteData(item:UserData){

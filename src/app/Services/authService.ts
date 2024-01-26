@@ -9,13 +9,10 @@ export class authService{
 
 
   authLogin(username:string,password:string):boolean{
+    
         let UserData=localStorage.getItem("UserData")
         console.log(UserData);
-        // console.log(this.LoginArray.loginusername);
-        // console.log(this.LoginArray.loginpassword);
-        
-      
-        // UserData?.indexOf((ele)=>{})
+       
       if(UserData){
         this.arfinal=JSON.parse(UserData)
         this.index= this.arfinal.findIndex(ele=>{
@@ -28,6 +25,8 @@ export class authService{
           this.isLoggedin=true
           localStorage.setItem("loggedUser",JSON.stringify(this.arfinal[this.index]))
           localStorage.setItem("token",JSON.stringify(authToken))
+          console.log(this.arfinal);
+          
           localStorage.setItem("UserData",JSON.stringify(this.arfinal))
       
         }
@@ -44,6 +43,25 @@ export class authService{
   getToken(){
     return localStorage.getItem('token')
 }
+
+  loggedUser!: UserData;
+  welcomeName: string | null = '';
+  userRole:string|null=null
+
+  getLoggedUser(){
+    const checkUser = localStorage.getItem('loggedUser');
+
+    if (checkUser) {
+     this.loggedUser = JSON.parse(checkUser);
+      this.welcomeName = this.loggedUser.username;
+      this.userRole=this.loggedUser.userrole
+    }
+
+    
+
+
+  }
+
 
 // isLoggedIn() {
 //     return  this.getToken()

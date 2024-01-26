@@ -9,11 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BranchListComponent implements OnInit {
 
-  constructor(private currentRoute :ActivatedRoute) { }
+  constructor() { }
 
-  editPermission:boolean=false
-  deletePermission:boolean=false
-  userrole:string|null=null
 
   branchDetails:BranchDetails[]=[
     {branchId:201,companyId:101,branchName:"Reliance",branchCount:4},
@@ -24,23 +21,7 @@ export class BranchListComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    localStorage.setItem('branchDetails',JSON.stringify(this.branchDetails))
 
-    this.userrole=this.currentRoute.snapshot.queryParamMap.get('userrole')
-
-    if(this.userrole==='user'){
-      this.editPermission=false
-      this.deletePermission=false
-    }
-  
-    if(this.userrole==='Admin'){
-      this.editPermission=true
-      this.deletePermission=false
-    }
-    if(this.userrole==='superAdmin'){
-      this.editPermission=true
-      this.deletePermission=true
-    }
   }
 
 }

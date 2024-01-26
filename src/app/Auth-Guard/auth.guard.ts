@@ -8,25 +8,6 @@ import { authService } from '../Services/authService';
 })
 export class AuthGuard implements CanActivate {
   constructor(private route:Router,private authservice:authService){}
-  // canActivateChild(route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot):boolean{
-
-  //     console.log(Boolean(this.authservice.getToken));
-    
-
-  //     if((this.authservice.getToken())){
-  //       console.log(this.authservice.getToken);
-        
-  //     //  this.route.navigate(['/home'])
-  //      return false
-  //     }else{
-
-  //       return true
-  //     }
-  //     //  this.route.navigate(['login'])
- 
- 
-  // }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):boolean {
@@ -40,12 +21,7 @@ export class AuthGuard implements CanActivate {
 
   
 
-    //  if(this.authservice.getToken()){
-    //   // this.route.navigate(['/home'])
-    //   return true
-    //  }
-    //   this.route.navigate(['login'])
-
+  
 
     
   }

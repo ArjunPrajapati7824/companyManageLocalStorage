@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from '../Models/UserData';
 import { userDataService } from '../Services/userDataService.service';
+import { authService } from '../Services/authService';
 
 @Component({
   selector: 'app-home-view',
@@ -11,7 +12,8 @@ import { userDataService } from '../Services/userDataService.service';
 export class HomeViewComponent implements OnInit {
   isAuthenticate: string | null = null;
 
-  constructor(private Route: Router, private currentRoute: ActivatedRoute,private userservice:userDataService) {
+  constructor(private Route: Router, private currentRoute: ActivatedRoute,private userservice:userDataService,
+                private authService :authService) {
     // this.isAuthenticate =
     //   this.currentRoute.snapshot.queryParamMap.get('userrole');
     // console.log(this.isAuthenticate);
@@ -21,28 +23,14 @@ export class HomeViewComponent implements OnInit {
     // }
   }
 
-  DashBoardEmployee:UserData[]=[]
-  loggedUser!: UserData;
-  welcomeName: string | null = null;
-  userRole: string | null = null;
+  // DashBoardEmployee:UserData[]=[]
+  // loggedUser!: UserData;
+  welcomeName: string | null = '';
 
   ngOnInit(): void {
-    const checkUser = localStorage.getItem('loggedUser');
-    console.log(checkUser);
-
-    this.DashBoardEmployee=this.userservice.getData()
-    
-    if (checkUser) {
-      this.loggedUser = JSON.parse(checkUser);
-      this.welcomeName = this.loggedUser.username;
-      console.log(this.welcomeName);
-
-      this.userRole = this.currentRoute.snapshot.queryParamMap.get('userrole');
-      // console.log(this.userRole);
-    }
-    // const d=localStorage.removeItem('loggedUser')
-    // console.log(d);
-    
+    // this.DashBoardEmployee=this.userservice.getData()
+    this.authService.getLoggedUser()
+    this.welcomeName=this.authService.welcomeName  
   }
 
   logout(){

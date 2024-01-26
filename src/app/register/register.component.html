@@ -27,13 +27,13 @@
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" >Your Name</label>
-                                    <input type="text" #username name="username"  class="form-control form-control-lg" />
+                                    <input type="text" [(ngModel)]="username" name="username"  class="form-control form-control-lg" #usernameId />
                                 </div>
 
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" >Password</label>
-                                    <input type="password" #password name="password"  class="form-control form-control-lg" />
+                                    <input type="password" [(ngModel)]="password" name="password"  class="form-control form-control-lg" #passwordId />
                                 </div>
 
                      
@@ -42,7 +42,7 @@
                                     <input class="form-check-input me-2" type="checkbox" disabled value=""
                                          />
                                     <label class="form-check-label" for="form2Example3g">
-                                        I agree all statements in <a href="#!" class="text-body"><u>Terms of
+                                        I agree with all statements in <a href="#!" class="text-body"><u>Terms of
                                                 service</u></a>
                                     </label>
                                 </div>
@@ -51,7 +51,7 @@
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
-                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="RegisterUSer(username.value,password.value)">Register</button>
+                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="RegisterUSer(usernameId.value,passwordId.value)">Register</button>
                                 </div>
 
                                

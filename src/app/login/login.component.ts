@@ -10,33 +10,43 @@ import { authService } from './../Services/authService';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authservice :authService,private route:Router) { }
+  constructor(private authservice: authService, private route: Router) { }
 
-  LoginArray={loginusername:'',loginpassword:''}
+  LoginArray = { loginusername: '', loginpassword: '' }
 
   // arfinal:UserData[]=[]
-  getUserData:UserData[]=[]
+  getUserData: UserData[] = []
   // isLoggedin:boolean=false
   ngOnInit(): void {
   }
 
-  LoginUser(username:string,password:string){
-    if(this.authservice.authLogin(username,password)){
-          this.route.navigate(['home'],{queryParams:{userrole:this.authservice.arfinal[this.authservice.index].userrole}})
-    }else{
-      alert("Invalid username or password")
+  LoginUser(username: string, password: string) {
+
+    if (username === '' || password === '') {
+      alert("Input all field")
+    } else {
+      if (this.authservice.authLogin(username, password)) {
+        this.route.navigate(['home'],
+          // {queryParams:{userrole:this.authservice.arfinal[this.authservice.index].userrole}}
+        )
+      } else {
+        alert("Invalid username or password")
+      }
+      this.LoginArray.loginusername = ''
+      this.LoginArray.loginpassword = ''
+      console.log(this.LoginArray);
     }
-    console.log(this.LoginArray);
+
     // let ar:string|null
-   
-    
-    
+
+
+
 
   }
-    // console.log(ar);
-    
-    
-    
-  
+  // console.log(ar);
+
+
+
+
 
 }
