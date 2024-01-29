@@ -13,6 +13,8 @@ import { EmployeeListComponent } from './home-view/employee-list/employee-list.c
 import { userDataService } from './Services/userDataService.service';
 import { CompanyDataService } from './Services/companyDataService';
 import { authService } from './Services/authService';
+import { ErrorPagenotFoundComponent } from './error-pagenot-found/error-pagenot-found.component';
+import { BranchService } from './Services/BranchService.service';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,15 @@ import { authService } from './Services/authService';
     LoginComponent,
     CompanyListComponent,
     BranchListComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    ErrorPagenotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [userDataService,CompanyDataService,authService],
+  providers: [userDataService,CompanyDataService,authService,BranchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

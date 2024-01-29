@@ -14,25 +14,25 @@
     </div>
   </nav> -->
 <section class="vh-100 bg-image"
-    style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    style="background-image: url('https://img.freepik.com/free-vector/light-trail-background_52683-5947.jpg?t=st=1706506867~exp=1706507467~hmac=a5dcdf3acd788b14748025884e16fb29e0b5c88503694e39ec89f8fe8412681f');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
+                    <div class="card" style="border-radius: 15px; background-color:rgba(12, 1, 1, 0.234);">
                         <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+                            <h2 class="text-uppercase text-center mb-5" style="color: aliceblue;">Create an account</h2>
 
                             <form >
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" >Your Name</label>
+                                    <label class="form-label" style="color: aliceblue;" >Your Name</label>
                                     <input type="text" [(ngModel)]="username" name="username"  class="form-control form-control-lg" #usernameId />
                                 </div>
 
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" >Password</label>
+                                    <label class="form-label" style="color: aliceblue;">Password</label>
                                     <input type="password" [(ngModel)]="password" name="password"  class="form-control form-control-lg" #passwordId />
                                 </div>
 
@@ -41,17 +41,19 @@
                                 <div class="form-check d-flex justify-content-center mb-5">
                                     <input class="form-check-input me-2" type="checkbox" disabled value=""
                                          />
-                                    <label class="form-check-label" for="form2Example3g">
-                                        I agree with all statements in <a href="#!" class="text-body"><u>Terms of
+                                    <label class="form-check-label" for="form2Example3g" style="color: aliceblue;">
+                                        I agree with all statements in <a href="#!" class="text-body"><u style="color: aliceblue;">Terms of
                                                 service</u></a>
                                     </label>
                                 </div>
-                                <b><a routerLink="login" style="margin-left: 230px;">Login Here</a></b>
+                                <b><a routerLink="login" style="margin-left: 190px; color: white;" >Login Here</a></b>
+
+                                <!-- <b><a style="color: aliceblue;" routerLink="login" style="margin-left: 230px;">Login Here</a></b> -->
 
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
-                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="RegisterUSer(usernameId.value,passwordId.value)">Register</button>
+                                        class="mt-3 btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="RegisterUSer(usernameId.value,passwordId.value)">Register</button>
                                 </div>
 
                                

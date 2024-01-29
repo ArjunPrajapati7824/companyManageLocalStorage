@@ -1,4 +1,7 @@
+import swal from "sweetalert2";
 import { UserData } from "../Models/UserData";
+
+
 
 export class userDataService{
 
@@ -44,7 +47,27 @@ export class userDataService{
     }
 
     deleteData(id:number){
-        this.TempData.splice(id,1)
+      swal.fire({
+        title:"Delete",
+        text:"Are you sure",
+        showCancelButton:true,
+        confirmButtonAriaLabel:"Yes",
+        cancelButtonAriaLabel:"No"
+      }).then((result)=>{
+        if(result.value){
+          this.TempData.splice(id,1)
+          swal.fire({
+            icon:"success",
+            title:"Delete",
+            text:"Data Deleted"
+          })
+        }else{
+          swal.fire({
+            icon:"success",
+            text:"Data is safe"
+          })
+        }
+      })
 
     }
 }

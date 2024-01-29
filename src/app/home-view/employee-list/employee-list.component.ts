@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/Models/UserData';
 import { userDataService } from './../../Services/userDataService.service';
 import { authService } from 'src/app/Services/authService';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list',
@@ -32,13 +33,12 @@ export class EmployeeListComponent implements OnInit {
 
   // TempData
   TempData:UserData[]=[]
- 
   
 
   ngOnInit(): void {
 
   this.TempData=this.service.getData()
-
+  
    this.authService.getLoggedUser()
 
     if(this.authService.userRole==='user'){
@@ -87,6 +87,9 @@ export class EmployeeListComponent implements OnInit {
     this.getId=this.TempData.findIndex(ele=>{
       return ele.userid===item.userid
     })
+    if(this.getid===item.userid && this.isFormOpen){
+      this.isFormOpen=false
+    }
     this.service.deleteData(this.getId)
    
 

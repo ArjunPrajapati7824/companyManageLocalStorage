@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserData } from '../Models/UserData';
 import { Router } from '@angular/router';
 import { authService } from './../Services/authService';
+import  swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -23,14 +24,21 @@ export class LoginComponent implements OnInit {
   LoginUser(username: string, password: string) {
 
     if (username === '' || password === '') {
-      alert("Input all field")
+      swal.fire({
+        icon:"info",
+        text:"Fill all fields"
+      })
+      return
     } else {
       if (this.authservice.authLogin(username, password)) {
         this.route.navigate(['home'],
           // {queryParams:{userrole:this.authservice.arfinal[this.authservice.index].userrole}}
         )
       } else {
-        alert("Invalid username or password")
+        swal.fire({
+          icon:"error",
+          text:"Invalid username or password"
+        })
       }
       this.LoginArray.loginusername = ''
       this.LoginArray.loginpassword = ''

@@ -8,6 +8,7 @@ import { CompanyListComponent } from './home-view/company-list/company-list.comp
 import { BranchListComponent } from './home-view/branch-list/branch-list.component';
 import { AuthGuard } from './Auth-Guard/auth.guard';
 import { LoginAuthGuard } from './Auth-Guard/login-auth.guard';
+import { ErrorPagenotFoundComponent } from './error-pagenot-found/error-pagenot-found.component';
 
 const routes: Routes = [
   {path:'',canActivate:[LoginAuthGuard],component:RegisterComponent},
@@ -17,7 +18,7 @@ const routes: Routes = [
     {path:'company',component:CompanyListComponent},
     {path:'branch',component:BranchListComponent},
   ]},
-  {path:'**',redirectTo:"login"},
+  {path:'**',component:ErrorPagenotFoundComponent},
   
   
 

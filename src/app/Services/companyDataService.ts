@@ -1,3 +1,4 @@
+import swal from "sweetalert2";
 import { Companydetails } from "../Models/Companydetails";
 
 export class CompanyDataService{
@@ -22,7 +23,28 @@ export class CompanyDataService{
     }
 
     deleteData(id:number){
-        this.companyDetails.splice(id,1)
+    swal.fire({
+            title:"Delete",
+            text:"Are you sure",
+            showCancelButton:true,
+            confirmButtonAriaLabel:"Yes",
+            cancelButtonAriaLabel:"No"
+          }).then((result)=>{
+            if(result.value){
+                this.companyDetails.splice(id,1)
+              swal.fire({
+                icon:"success",
+                title:"Delete",
+                text:"Data Deleted"
+              })
+            }else{
+              swal.fire({
+                icon:"success",
+                text:"Data is safe"
+              })
+            }
+          })
+    
 
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Companydetails } from 'src/app/Models/Companydetails';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyDataService } from 'src/app/Services/companyDataService';
 import { authService } from 'src/app/Services/authService';
 
@@ -12,7 +12,8 @@ import { authService } from 'src/app/Services/authService';
 })
 export class CompanyListComponent implements OnInit {
 
-  constructor(private service : CompanyDataService,private currentRoute :ActivatedRoute,
+  constructor(private service : CompanyDataService,
+              private route:Router,
               private authService:authService) { }
 
 
@@ -78,12 +79,18 @@ export class CompanyListComponent implements OnInit {
 
   }
 
+
   deleteData(item:Companydetails){
+  
     this.getId=this.companyDetails.findIndex(ele=>{
       return ele.companyId===item.companyId
     })
+
+    if(this.getid===item.companyId && this.isFormOpen){
+      this.isFormOpen=false
+    }
     this.service.deleteData(this.getId)
-   
+    // this.route.navigate(['home'])
 
   }
 

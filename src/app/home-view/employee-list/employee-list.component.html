@@ -1,4 +1,4 @@
-<div class="container col-sm-6 mt-3">
+<div class="container col-sm-6 mt-5">
 <table class="table" >
     <thead>
     <tr>
@@ -34,7 +34,8 @@
             <label>Enter New User Role</label>    
             <input type="text" class="form-control" [(ngModel)]="getrole" #updateRole ><br>
 
-            <button class="btn btn-success" (click)="updateData(updateId.value,updateName.value,updateRole.value)" >Update Data</button>
+            <button class="btn btn-success" (click)="updateData(updateId.value,updateName.value,updateRole.value)" >Update Data</button>&nbsp;
+            <button class="btn btn-warning" (click)="isFormOpen=false" >Cancel </button>
         </div>
     </div>
 </div>
