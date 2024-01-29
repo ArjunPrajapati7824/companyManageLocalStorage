@@ -62,16 +62,15 @@
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
 						alt="comments"> 
 				</div> 
-<!-- 
-				<div class="box box4"> 
+
+<div class="box box4" *ngIf="canAdd" (click)="openaddEmployeeForm()"> 
 					<div class="text"> 
-            <h1 class="topic-heading" style="color: black;">Employee</h1> 
-						<h1 class="topic" style="color: black;">60.5k</h1> 
+            <h1 class="topic-heading" style="color: black;">Add Employee</h1> 
 					</div> 
 
 					<img src= 
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published"> 
-			</div>  -->
+			</div> 
 
 
 		</div> 
@@ -80,6 +79,24 @@
   <!--Dashboard End-->
 
 
+
+
+  <!--add employee form -->
+
+  <div class="container col-sm-5 mt-5" *ngIf="addEmployeeFormOpen">
+    <div class="row">
+        <div class="col-xs-6">
+
+            <label>Enter New Name</label>    
+            <input type="text" class="form-control" #addEmployeeId >
+            
+          <br>
+            <button class="btn btn-success" (click)="addEmployee(addEmployeeId.value)" >Add Employee</button>&nbsp;
+            <button class="btn btn-warning" (click)="addEmployeeFormOpen=false" >Cancel </button>
+
+        </div>
+    </div>
+</div>
 
 
 

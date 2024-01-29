@@ -37,6 +37,8 @@ export class HomeViewComponent implements OnInit {
   countEmployee: number = 0;
   countCompany: number = 0;
   countBranch: number = 0;
+  canAdd:boolean=false
+  addEmployeeFormOpen:boolean=false
 
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
@@ -58,6 +60,7 @@ export class HomeViewComponent implements OnInit {
     this.countEmployee = this.userservice.TempData.length;
     this.countCompany = this.company.companyDetails.length;
     this.countBranch = this.branchService.branchDetails.length;
+    this.canAdd=this.authService.canAddUser
   }
 
   logout() {
@@ -66,4 +69,14 @@ export class HomeViewComponent implements OnInit {
 
     this.Route.navigate(['login']);
   }
+
+  openaddEmployeeForm(){
+    this.addEmployeeFormOpen=true
+  }
+
+  addEmployee(name:string){
+      this.userservice.addAdminemployee(name)
+      this.addEmployeeFormOpen=false
+  }
+
 }

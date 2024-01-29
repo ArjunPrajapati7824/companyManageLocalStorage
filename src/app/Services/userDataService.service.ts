@@ -70,5 +70,10 @@ export class userDataService{
       })
 
     }
+
+    addAdminemployee(name:string){
+      this.TempData.push({userid:this.TempData.length+1,username:name,userrole:'user',password:''})
+      
+    }
 }
 

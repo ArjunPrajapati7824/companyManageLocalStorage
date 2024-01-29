@@ -6,6 +6,7 @@ export class authService{
   isLoggedin:boolean=false
   arfinal:UserData[]=[]
   index:number=0
+  canAddUser:boolean=false
 
 
   authLogin(username:string,password:string):boolean{
@@ -55,6 +56,11 @@ export class authService{
      this.loggedUser = JSON.parse(checkUser);
       this.welcomeName = this.loggedUser.username;
       this.userRole=this.loggedUser.userrole
+      console.log(this.userRole==="SuperAdmin");
+      
+      if(this.userRole==="SuperAdmin"){
+        this.canAddUser=true
+      }
     }
 
     
