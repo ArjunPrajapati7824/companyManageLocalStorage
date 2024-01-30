@@ -5,15 +5,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
-          <a class="nav-link" [routerLink]="'employee'"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Employee List</a>
+          <a class="nav-link" [routerLink]="'employee'"   [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}"  >Employee List</a>
         </li>
 
         <li class="nav-item ">
-            <a class="nav-link" routerLink="company"  [routerLinkActive]="'active'">Company Details </a>
+            <a class="nav-link" routerLink="company"  aria-disabled="true"  [routerLinkActive]="'active'">Company Details </a>
           </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="branch"  [routerLinkActive]="'active'">Branch Details</a>
+          <a class="nav-link" routerLink="branch" [ngClass]="{disabled:this.empdis}" [routerLinkActive]="'active'">Branch Details</a>
         </li>
 
         <li class="nav-item">

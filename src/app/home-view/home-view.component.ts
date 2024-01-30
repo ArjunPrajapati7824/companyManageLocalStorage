@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { UserData } from '../Models/UserData';
 import { userDataService } from '../Services/userDataService.service';
 import { authService } from '../Services/authService';
 import { CompanyDataService } from '../Services/companyDataService';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { BranchService } from './../Services/BranchService.service';
+
 
 @Component({
   selector: 'app-home-view',
@@ -21,7 +22,7 @@ export class HomeViewComponent implements OnInit {
     private userservice: userDataService,
     private authService: authService,
     private company: CompanyDataService,
-    private branchService: BranchService
+    private branchService: BranchService,
   ) {
     // this.isAuthenticate =
     //   this.currentRoute.snapshot.queryParamMap.get('userrole');
@@ -40,6 +41,9 @@ export class HomeViewComponent implements OnInit {
   canAdd:boolean=false
   addEmployeeFormOpen:boolean=false
 
+  empdis:boolean=false
+
+
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
     
@@ -49,24 +53,34 @@ export class HomeViewComponent implements OnInit {
       this.countEmployee = this.userservice.TempData.length;
       this.countCompany = this.company.companyDetails.length;
       this.countBranch = this.branchService.branchDetails.length;
-    //Add 'implements DoCheck' to the class.
+      //Add 'implements DoCheck' to the class.
+      
+    }
     
-  }
+    ngOnInit(): void {
+      // this.DashBoardEmployee=this.userservice.getData()
+      this.authService.getLoggedUser();
+      this.welcomeName = this.authService.welcomeName;
+      this.countEmployee = this.userservice.TempData.length;
+      this.countCompany = this.company.companyDetails.length;
+      this.countBranch = this.branchService.branchDetails.length;
+      
+      
+     
+        
+  
+      // console.log(e['permisson']);
+      // console.log(e['permisson2']);
 
-  ngOnInit(): void {
-    // this.DashBoardEmployee=this.userservice.getData()
-    this.authService.getLoggedUser();
-    this.welcomeName = this.authService.welcomeName;
-    this.countEmployee = this.userservice.TempData.length;
-    this.countCompany = this.company.companyDetails.length;
-    this.countBranch = this.branchService.branchDetails.length;
+    
+
     this.canAdd=this.authService.canAddUser
   }
 
   logout() {
-    localStorage.removeItem('loggedUser');
+    sessionStorage.removeItem('loggedUser');
     localStorage.removeItem('token');
-
+    this.authService.canAddUser=false
     this.Route.navigate(['login']);
   }
 

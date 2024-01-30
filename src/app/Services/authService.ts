@@ -24,7 +24,7 @@ export class authService{
         if(this.index!=-1){
           const authToken = "AuthTokenKey"
           this.isLoggedin=true
-          localStorage.setItem("loggedUser",JSON.stringify(this.arfinal[this.index]))
+          sessionStorage.setItem("loggedUser",JSON.stringify(this.arfinal[this.index]))
           localStorage.setItem("token",JSON.stringify(authToken))
           console.log(this.arfinal);
           
@@ -45,12 +45,14 @@ export class authService{
     return localStorage.getItem('token')
 }
 
+
+
   loggedUser!: UserData;
   welcomeName: string | null = '';
   userRole:string|null=null
 
   getLoggedUser(){
-    const checkUser = localStorage.getItem('loggedUser');
+    const checkUser = sessionStorage.getItem('loggedUser');
 
     if (checkUser) {
      this.loggedUser = JSON.parse(checkUser);
@@ -63,15 +65,22 @@ export class authService{
       }
     }
 
-    
-
-
   }
 
+  // userPermission=[
+  //   {"Admin":["comp","branch"]},
+  //   {"user":["emp"]},
+  //   {"SuperAdmin":["emp,comp,branch"]},
+  // ]
 
-// isLoggedIn() {
-//     return  this.getToken()
-// }
+
+  userPermission=[
+    {"Admin":"Access"},
+    {"user":"NotAccess"},
+    {"SuperAdmin":"NotAccess"},
+  ]
+
+
 }
 
  

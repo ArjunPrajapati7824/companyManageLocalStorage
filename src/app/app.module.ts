@@ -30,7 +30,7 @@ import { BranchService } from './Services/BranchService.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [userDataService,CompanyDataService,authService,BranchService],
   bootstrap: [AppComponent]

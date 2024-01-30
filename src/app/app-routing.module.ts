@@ -9,23 +9,27 @@ import { BranchListComponent } from './home-view/branch-list/branch-list.compone
 import { AuthGuard } from './Auth-Guard/auth.guard';
 import { LoginAuthGuard } from './Auth-Guard/login-auth.guard';
 import { ErrorPagenotFoundComponent } from './error-pagenot-found/error-pagenot-found.component';
+import { authService } from './Services/authService';
+import { PermissionGuard } from './Auth-Guard/permission.guard';
 
 const routes: Routes = [
   {path:'',canActivate:[LoginAuthGuard],component:RegisterComponent},
   {path:'login', canActivate:[LoginAuthGuard],component:LoginComponent},
   {path:'home', canActivate:[AuthGuard],component:HomeViewComponent,children:[
-    {path:'employee',component:EmployeeListComponent},
-    {path:'company',component:CompanyListComponent},
-    {path:'branch',component:BranchListComponent},
+    {path:'employee', data:{permisson:["user","Admin","SuperAdmin"]},canActivate:[PermissionGuard],component:EmployeeListComponent},
+    {path:'company',data:{permisson:["Admin","SuperAdmin"]},canActivate:[PermissionGuard],component:CompanyListComponent},
+    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],component:BranchListComponent},
   ]},
   {path:'**',component:ErrorPagenotFoundComponent},
   
   
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
 exports: [RouterModule]
 })
-export class AppRoutingModule { }
+
+export class AppRoutingModule { 
+  constructor(private authSer:authService){}
+}
