@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'home', canActivate:[AuthGuard],component:HomeViewComponent,children:[
     {path:'employee', data:{permisson:["user","Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:EmployeeListComponent},
     {path:'company',data:{permisson:["Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:CompanyListComponent},
-    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],component:BranchListComponent}
+    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],resolve:{branch:PermissionGuard},component:BranchListComponent}
   ]},
   {path:'**',component:ErrorPagenotFoundComponent},
   

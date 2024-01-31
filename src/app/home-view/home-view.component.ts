@@ -47,6 +47,7 @@ export class HomeViewComponent implements OnInit {
   userRole:string|null=null
   permissionArray:string[]=[]
 
+  loadStart:boolean=false
 
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
@@ -57,6 +58,14 @@ export class HomeViewComponent implements OnInit {
       this.countEmployee = this.userservice.TempData.length;
       this.countCompany = this.company.companyDetails.length;
       this.countBranch = this.branchService.branchDetails.length;
+
+        this.loadStart=this.branchService.isLoading
+      // setTimeout(()=>{
+
+      //   this.loadStart=false
+      // },5000)
+      // console.log(this.loadStart);
+      
       //Add 'implements DoCheck' to the class.
       
       // if(this.permissionArray.includes("SuperAdmin")){
@@ -69,6 +78,7 @@ export class HomeViewComponent implements OnInit {
       ngOnInit(): void {
         // this.DashBoardEmployee=this.userservice.getData()
         this.authService.getLoggedUser();
+
       this.welcomeName = this.authService.welcomeName;
       this.countEmployee = this.userservice.TempData.length;
       this.countCompany = this.company.companyDetails.length;

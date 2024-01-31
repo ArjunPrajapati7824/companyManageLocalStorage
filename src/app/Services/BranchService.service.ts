@@ -1,4 +1,6 @@
+import { ActivatedRoute } from "@angular/router";
 import { BranchDetails } from "../Models/BranchDetails";
+import { Observable } from "rxjs";
 
 export class BranchService{
 
@@ -12,6 +14,18 @@ export class BranchService{
 
       getData(){
         return this.branchDetails
+    }
+
+    isLoading:boolean=false
+    getAllBranch(){
+      this.isLoading=true
+      return new Observable<BranchDetails[]>((sub)=>{
+    
+        setTimeout(()=>{
+            sub.next(this.branchDetails)
+        },5000)
+      })  
+      // this.isLoading=false
     }
 
     
