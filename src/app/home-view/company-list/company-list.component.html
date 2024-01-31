@@ -42,7 +42,7 @@
                 <input type="text" class="form-control" [(ngModel)]="getGst" #updateGst ><br>
 
                 <button class="btn btn-success" (click)="updateData(updateId.value,updateName.value,updateLocation.value,updateGst.value)" >Update Data</button>&nbsp;
-                <button class="btn btn-warning" (click)="isFormOpen=false" >Cancel </button>
+    <button class="btn btn-warning" (click)="[isFormSubmit=true,clearformData(),isFormOpen=false]" >Cancel </button>
 
             </div>
         </div>

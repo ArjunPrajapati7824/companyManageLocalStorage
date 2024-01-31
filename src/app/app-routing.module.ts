@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanDeactivate } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeViewComponent } from './home-view/home-view.component';
@@ -16,9 +16,9 @@ const routes: Routes = [
   {path:'',canActivate:[LoginAuthGuard],component:RegisterComponent},
   {path:'login', canActivate:[LoginAuthGuard],component:LoginComponent},
   {path:'home', canActivate:[AuthGuard],component:HomeViewComponent,children:[
-    {path:'employee', data:{permisson:["user","Admin","SuperAdmin"]},canActivate:[PermissionGuard],component:EmployeeListComponent},
-    {path:'company',data:{permisson:["Admin","SuperAdmin"]},canActivate:[PermissionGuard],component:CompanyListComponent},
-    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],component:BranchListComponent},
+    {path:'employee', data:{permisson:["user","Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:EmployeeListComponent},
+    {path:'company',data:{permisson:["Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:CompanyListComponent},
+    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],component:BranchListComponent}
   ]},
   {path:'**',component:ErrorPagenotFoundComponent},
   

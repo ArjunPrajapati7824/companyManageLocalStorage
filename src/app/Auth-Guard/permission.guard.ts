@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, CanDeactivate, RouterState, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserData } from '../Models/UserData';
+import { CompanyListComponent } from './../home-view/company-list/company-list.component';
+
+export interface IDeactivateComponent{
+  CanDeactivateAccess:()=>Observable<boolean> | Promise<boolean> | boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class PermissionGuard implements CanActivate {
+export class PermissionGuard implements CanActivate ,CanDeactivate<IDeactivateComponent>{
   constructor(private currRoute:ActivatedRoute){}
 
   loggedUSer!:UserData
@@ -19,40 +24,29 @@ export class PermissionGuard implements CanActivate {
 
     ): boolean
     {
-      // console.log(this.currRoute.data.subscribe(e=>{
-      //   console.log(e);
-        
-      // }));
-      
-      // this.permission.push(this.currRoute.data['permisson'])
+     
       const checkUser = sessionStorage.getItem('loggedUser');
       if (checkUser) {
        this.loggedUSer = JSON.parse(checkUser);
        this.userRole=this.loggedUSer.userrole
       }
-      // let perm=route.data['permisson']
-      // console.log(perm);
+    
       
       this.permission=route.data['permisson']
-      // this.permission.forEach(e=>{
-      //   console.log(e);
-      // })
+  
       if(this.permission.includes(this.userRole!)){
         return true
       }else{
         return false
       }
-      console.log("dfg",this.permission.includes(this.userRole!));
-      // console.log(this.userRole);
-
-      
-      
-      
-      // console.log(this.permission.includes(perm))
-      
-     
-
-    
+   
   }
+
+  canDeactivate(
+    component:IDeactivateComponent,currentRoute:ActivatedRouteSnapshot,
+    currentstate:RouterStateSnapshot,nextState:RouterStateSnapshot){
+      return component.CanDeactivateAccess()
+      // return false
+    }
   
 }

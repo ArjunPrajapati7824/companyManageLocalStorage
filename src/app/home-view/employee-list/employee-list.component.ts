@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit ,ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/Models/UserData';
 import { userDataService } from './../../Services/userDataService.service';
 import { authService } from 'src/app/Services/authService';
 import swal from 'sweetalert2';
+import { IDeactivateComponent } from 'src/app/Auth-Guard/permission.guard';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
 
-
+  @ViewChild('updateId') id!:ElementRef
+  @ViewChild('updateName') name!:ElementRef
+  @ViewChild('updateRole') role!:ElementRef
   constructor(private service : userDataService,private Route : Router,private currentRoute :ActivatedRoute,
               private authService:authService) { 
-   console.log("i am cmoning");
    
-    
+  
   }
   editPermission:boolean=false
   deletePermission:boolean=false
@@ -30,6 +32,7 @@ export class EmployeeListComponent implements OnInit {
   getid:number|null=null
   getname:string|null=null
   getrole:string|null=null
+  isFormSubmit:boolean=false
 
   // TempData
   TempData:UserData[]=[]
@@ -79,6 +82,8 @@ export class EmployeeListComponent implements OnInit {
 
   updateData(id:string,name:string,role:string){
     this.service.updateData(this.getId,id,name,role)
+    this.isFormSubmit=true
+
     this.isFormOpen=false//update value for show or not form
 
   }
@@ -92,6 +97,20 @@ export class EmployeeListComponent implements OnInit {
     }
     this.service.deleteData(this.getId)
    
+
+  }
+
+  CanDeactivateAccess(){
+    if(this.isFormOpen){
+
+      if((this.id.nativeElement.value || this.name.nativeElement.value|| this.role.nativeElement.value ) && !this.isFormSubmit ){
+        return confirm("You discard without update data")
+      }else{
+        return true
+      }
+    }else{
+      return true
+    }
 
   }
 

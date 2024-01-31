@@ -7,6 +7,7 @@ export class authService{
   arfinal:UserData[]=[]
   index:number=0
   canAddUser:boolean=false
+  canAddifemp:boolean=false
 
 
   authLogin(username:string,password:string):boolean{

@@ -41,7 +41,11 @@ export class HomeViewComponent implements OnInit {
   canAdd:boolean=false
   addEmployeeFormOpen:boolean=false
 
-  empdis:boolean=false
+  employeedis:boolean=false
+  companydis:boolean=false
+  branchdis:boolean=false
+  userRole:string|null=null
+  permissionArray:string[]=[]
 
 
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
@@ -55,17 +59,39 @@ export class HomeViewComponent implements OnInit {
       this.countBranch = this.branchService.branchDetails.length;
       //Add 'implements DoCheck' to the class.
       
-    }
-    
-    ngOnInit(): void {
-      // this.DashBoardEmployee=this.userservice.getData()
-      this.authService.getLoggedUser();
+      // if(this.permissionArray.includes("SuperAdmin")){
+        
+        // }
+        
+        
+      }
+      
+      ngOnInit(): void {
+        // this.DashBoardEmployee=this.userservice.getData()
+        this.authService.getLoggedUser();
       this.welcomeName = this.authService.welcomeName;
       this.countEmployee = this.userservice.TempData.length;
       this.countCompany = this.company.companyDetails.length;
       this.countBranch = this.branchService.branchDetails.length;
+      this.userRole=this.authService.userRole
+      if(this.userRole==="user"){
+        console.log(this.permissionArray.includes("user"));
+        
+        this.companydis=true
+        this.branchdis=true
+      }
+      else if(this.userRole==="Admin"){
+        this.branchdis=true
+    
+      }else{
+        this.employeedis=false
+        this.companydis=false
+        this.branchdis=false
+      }
       
-      
+      this.canAdd=this.authService.canAddUser
+    
+    
      
         
   
@@ -73,8 +99,7 @@ export class HomeViewComponent implements OnInit {
       // console.log(e['permisson2']);
 
     
-
-    this.canAdd=this.authService.canAddUser
+        
   }
 
   logout() {
