@@ -39,7 +39,6 @@ export class HomeViewComponent implements OnInit {
   countCompany: number = 0;
   countBranch: number = 0;
   canAdd:boolean=false
-  addEmployeeFormOpen:boolean=false
 
   employeedis:boolean=false
   companydis:boolean=false
@@ -120,12 +119,12 @@ export class HomeViewComponent implements OnInit {
   }
 
   openaddEmployeeForm(){
-    this.addEmployeeFormOpen=true
+    
+    this.userservice.addEmployeeFormOpen=true
+    this.Route.navigate(['/home/employee'])
+
   }
 
-  addEmployee(name:string){
-      this.userservice.addAdminemployee(name)
-      this.addEmployeeFormOpen=false
-  }
+ 
 
 }

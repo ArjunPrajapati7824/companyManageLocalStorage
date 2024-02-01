@@ -5,6 +5,9 @@ import { UserData } from "../Models/UserData";
 
 export class userDataService{
 
+
+  addEmployeeFormOpen:boolean=false
+
   id=0
     TempData:UserData[]=[
       {userid:1,username:'Arjun',userrole:'user',password:''},
@@ -72,7 +75,13 @@ export class userDataService{
     }
 
     addAdminemployee(name:string){
-      this.TempData.push({userid:this.TempData.length+1,username:name,userrole:'user',password:''})
+      if(name===''){
+        return alert('fill data')
+     }else{
+
+       this.TempData.push({userid:this.TempData.length+1,username:name,userrole:'user',password:''})
+     }
+     
       
     }
 }

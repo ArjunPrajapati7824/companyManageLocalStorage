@@ -16,6 +16,7 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
   @ViewChild('updateId') id!:ElementRef
   @ViewChild('updateName') name!:ElementRef
   @ViewChild('updateRole') role!:ElementRef
+  @ViewChild('addEmployeeId') addEmp!:ElementRef
   constructor(private service : userDataService,private Route : Router,private currentRoute :ActivatedRoute,
               private authService:authService) { 
    
@@ -32,10 +33,16 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
   getid:number|null=null
   getname:string|null=null
   getrole:string|null=null
+  addEmployeeFormOpen:boolean=false
   isFormSubmit:boolean=false
-
+  
   // TempData
   TempData:UserData[]=[]
+  
+  //open add empl form
+  openaddForm:boolean=false
+  isAddFormSubmit:boolean=false
+
   
 
   ngOnInit(): void {
@@ -59,8 +66,17 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
     }
 
   }
-
-
+  
+  
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.openaddForm=this.service.addEmployeeFormOpen
+    // if(this.openaddForm){
+    //   this.Route.navigate(['/home/employee'])
+    // }
+    
+  }
      
   formOpen(item:UserData){
     this.isFormOpen=true//update value for show or not form
@@ -101,17 +117,47 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
   }
 
   CanDeactivateAccess(){
-    if(this.isFormOpen){
+    if(this.isFormOpen ){
 
-      if((this.id.nativeElement.value || this.name.nativeElement.value|| this.role.nativeElement.value ) && !this.isFormSubmit ){
+      if((this.id.nativeElement.value || this.name.nativeElement.value|| this.role.nativeElement.value )    && !this.isFormSubmit ){
         return confirm("You discard without update data")
       }else{
         return true
       }
-    }else{
+    } else if(this.openaddForm ){
+
+      if((this.addEmp.nativeElement.value || this.addEmp.nativeElement.value==='' )    && !this.isAddFormSubmit ){
+        return confirm("You discard without Add Employee")
+      }else{
+        return true
+      }
+    }
+    else{
       return true
     }
 
+
+   
+
   }
+
+
+
+  addEmployee(name:string){
+    this.service.addAdminemployee(name)
+    this.isAddFormSubmit=true
+    if(name!=''){
+      this.service.addEmployeeFormOpen=false
+    }
+    if(name===''){
+      this.isAddFormSubmit=false
+    }
+}
+
+closeForm(){
+  if(this.CanDeactivateAccess()){
+    this.service.addEmployeeFormOpen=false
+  }
+}
 
 }
