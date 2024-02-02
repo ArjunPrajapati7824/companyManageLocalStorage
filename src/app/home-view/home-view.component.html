@@ -16,8 +16,12 @@
           <a class="nav-link" routerLink="branch" [ngClass]="{disabled:this.branchdis}" [routerLinkActive]="'active'">Branch Details</a>
         </li>
 
+		<li class="nav-item">
+			<a class="nav-link" routerLink="favourite" [ngClass]="{disabled:this.branchdis}"  [routerLinkActive]="'active'">Favourite</a>
+		  </li>
+
         <li class="nav-item">
-          <a class="nav-link" routerLink="branch" (click)="logout()">Logout</a>
+          <a class="nav-link"  (click)="logout()">Logout</a>
         </li>
         </ul>
     </div>
@@ -67,6 +71,8 @@
 					<div class="text"> 
             <h1 class="topic-heading" style="color: black;">Add Employee</h1> 
 					</div> 
+
+			
 
 					<img src= 
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published"> 

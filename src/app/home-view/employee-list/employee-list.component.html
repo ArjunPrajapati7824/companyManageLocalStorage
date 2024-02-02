@@ -30,6 +30,7 @@
 <tbody>
 
     <tr *ngFor="let user of TempData">
+        <button *ngIf="deletePermission"  [ngClass]="{fvrtcls:fvrt}" (click)="myFavourite(user)">Favourite</button>
         <td cope="row">{{user.userid}}</td>
         <td>{{user.username}}</td>
         <td>{{user.userrole}}</td>

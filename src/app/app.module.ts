@@ -15,6 +15,7 @@ import { CompanyDataService } from './Services/companyDataService';
 import { authService } from './Services/authService';
 import { ErrorPagenotFoundComponent } from './error-pagenot-found/error-pagenot-found.component';
 import { BranchService } from './Services/BranchService.service';
+import { FavouriteEmployeeComponent } from './home-view/favourite-employee/favourite-employee.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BranchService } from './Services/BranchService.service';
     CompanyListComponent,
     BranchListComponent,
     EmployeeListComponent,
-    ErrorPagenotFoundComponent
+    ErrorPagenotFoundComponent,
+    FavouriteEmployeeComponent
   ],
   imports: [
     BrowserModule,

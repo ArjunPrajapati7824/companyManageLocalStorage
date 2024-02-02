@@ -55,10 +55,15 @@ export class HomeViewComponent implements OnInit {
     ngDoCheck(): void {
       //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
       this.countEmployee = this.userservice.TempData.length;
-      this.countCompany = this.company.companyDetails.length;
+      // this.countCompany = this.company.companyDetails.length;
       this.countBranch = this.branchService.branchDetails.length;
-
-        this.loadStart=this.branchService.isLoading
+      // this.company.sendCurrentLength()
+      this.company.sendCurrentData.subscribe(e=>{
+        this.countCompany=e
+        console.log(e);
+        
+      })
+      this.loadStart=this.branchService.isLoading
       // setTimeout(()=>{
 
       //   this.loadStart=false
@@ -80,7 +85,6 @@ export class HomeViewComponent implements OnInit {
 
       this.welcomeName = this.authService.welcomeName;
       this.countEmployee = this.userservice.TempData.length;
-      this.countCompany = this.company.companyDetails.length;
       this.countBranch = this.branchService.branchDetails.length;
       this.userRole=this.authService.userRole
       if(this.userRole==="user"){
@@ -100,13 +104,6 @@ export class HomeViewComponent implements OnInit {
       
       this.canAdd=this.authService.canAddUser
     
-    
-     
-        
-  
-      // console.log(e['permisson']);
-      // console.log(e['permisson2']);
-
     
         
   }

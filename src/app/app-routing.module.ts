@@ -11,6 +11,7 @@ import { LoginAuthGuard } from './Auth-Guard/login-auth.guard';
 import { ErrorPagenotFoundComponent } from './error-pagenot-found/error-pagenot-found.component';
 import { authService } from './Services/authService';
 import { PermissionGuard } from './Auth-Guard/permission.guard';
+import { FavouriteEmployeeComponent } from './home-view/favourite-employee/favourite-employee.component';
 
 const routes: Routes = [
   {path:'',canActivate:[LoginAuthGuard],component:RegisterComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'home', canActivate:[AuthGuard],component:HomeViewComponent,children:[
     {path:'employee', data:{permisson:["user","Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:EmployeeListComponent},
     {path:'company',data:{permisson:["Admin","SuperAdmin"]},canActivate:[PermissionGuard],canDeactivate:[PermissionGuard],component:CompanyListComponent},
-    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],resolve:{branch:PermissionGuard},component:BranchListComponent}
+    {path:'branch',data:{permisson:["SuperAdmin"]},canActivate:[PermissionGuard],resolve:{branch:PermissionGuard},component:BranchListComponent},
+    {path:'favourite', component:FavouriteEmployeeComponent}
   ]},
   {path:'**',component:ErrorPagenotFoundComponent},
   

@@ -1,5 +1,9 @@
 import swal from "sweetalert2";
 import { Companydetails } from "../Models/Companydetails";
+import { BehaviorSubject, Subject } from "rxjs";
+import { HomeViewComponent } from './../home-view/home-view.component';
+import { getLocaleFirstDayOfWeek } from "@angular/common";
+import { BranchService } from "./BranchService.service";
 
 export class CompanyDataService{
 
@@ -22,6 +26,15 @@ export class CompanyDataService{
 
     }
 
+    sendCurrentData=new BehaviorSubject<number>(this.companyDetails.length);
+  
+
+    sendCurrentLength(){
+      this.sendCurrentData.next(this.companyDetails.length)
+     
+  
+      }
+
     deleteData(id:number){
     swal.fire({
             title:"Delete",
@@ -32,6 +45,7 @@ export class CompanyDataService{
           }).then((result)=>{
             if(result.value){
                 this.companyDetails.splice(id,1)
+                this.sendCurrentLength()
               swal.fire({
                 icon:"success",
                 title:"Delete",

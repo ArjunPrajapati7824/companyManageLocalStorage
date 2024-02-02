@@ -103,6 +103,8 @@ export class CompanyListComponent implements OnInit {
       this.isFormOpen=false
     }
     this.service.deleteData(this.getId)
+    
+
     // this.route.navigate(['home'])
 
   }

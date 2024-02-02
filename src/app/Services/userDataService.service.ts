@@ -1,5 +1,6 @@
 import swal from "sweetalert2";
 import { UserData } from "../Models/UserData";
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 
@@ -80,9 +81,16 @@ export class userDataService{
      }else{
 
        this.TempData.push({userid:this.TempData.length+1,username:name,userrole:'user',password:''})
-     }
-     
-      
+     }  
     }
+
+    addFavourite=new BehaviorSubject<UserData>({userid:null,username:'',password:'',userrole:''});
+
+    setFavourite(user:UserData){
+      this.addFavourite.next(user)
+
+    }
+
+
 }
 

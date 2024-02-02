@@ -17,13 +17,18 @@ export class BranchService{
     }
 
     isLoading:boolean=false
+
     getAllBranch(){
       this.isLoading=true
       return new Observable<BranchDetails[]>((sub)=>{
+        console.log(sub);
+        // console.log(sub.next());
+        
+        
     
         setTimeout(()=>{
             sub.next(this.branchDetails)
-        },5000)
+        },2000)
       })  
       // this.isLoading=false
     }

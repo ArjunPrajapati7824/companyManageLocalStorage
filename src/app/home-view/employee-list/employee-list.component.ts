@@ -43,11 +43,16 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
   openaddForm:boolean=false
   isAddFormSubmit:boolean=false
 
+  //For favourite
+  fvrt:boolean=false
+
   
 
   ngOnInit(): void {
 
   this.TempData=this.service.getData()
+
+  
   
    this.authService.getLoggedUser()
 
@@ -136,11 +141,7 @@ export class EmployeeListComponent implements OnInit ,IDeactivateComponent{
       return true
     }
 
-
-   
-
   }
-
 
 
   addEmployee(name:string){
@@ -158,6 +159,19 @@ closeForm(){
   if(this.CanDeactivateAccess()){
     this.service.addEmployeeFormOpen=false
   }
+}
+
+myFavourite(user:UserData){
+  
+  // let index =  this.service.TempData.findIndex(e=>{
+  //   return e.userid===user.userid
+  // })
+
+  this.service.setFavourite(user)
+  // this.fvrt=true
+  // console.log(index);
+  // this.service.TempData[index]
+  
 }
 
 }
